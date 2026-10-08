@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Apresentação Executiva — Folga Manager</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+    @page {
+      size: A4 portrait;
+      margin: 0;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #f1f5f9;
+      color: #0f172a;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .page {
+      width: 210mm;
+      height: 297mm;
+      min-height: 297mm;
+      max-height: 297mm;
+      padding: 20mm 22mm 18mm 22mm;
+      margin: 0 auto;
+      background: #ffffff;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      page-break-after: always;
+      page-break-inside: avoid;
+      overflow: hidden;
+    }
+
+    /* Cabeçalho das Páginas Internas */
+    .page-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #e2e8f0;
+      margin-bottom: 18px;
+    }
+
+    .page-header .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 800;
+      font-size: 13px;
+      color: #0f172a;
+      letter-spacing: -0.3px;
+    }
+
+    .brand-icon {
+      width: 22px;
+      height: 22px;
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .page-header .doc-tag {
+      font-size: 11px;
+      font-weight: 600;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Rodapé das Páginas Internas */
+    .page-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 12px;
+      border-top: 1px solid #e2e8f0;
+      font-size: 10.5px;
+      color: #64748b;
+      margin-top: auto;
+    }
+
+    /* Tipografia e Títulos */
+    .section-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #2563eb;
+      margin-bottom: 4px;
+    }
+
+    .page-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -0.5px;
+      margin: 0 0 8px 0;
+      line-height: 1.2;
+    }
+
+    .page-subtitle {
+      font-size: 12.5px;
+      color: #475569;
+      line-height: 1.5;
+      margin: 0 0 18px 0;
+    }
+
+    /* Cards e Containers */
+    .card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+
+    .card-highlight {
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+    }
+
+    .card-blue {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+    }
+
+    .card-red {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+    }
+
+    .card-emerald {
+      background: #ecfdf5;
+      border: 1px solid #a7f3d0;
+    }
+
+    .card-amber {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+    }
+
+    /* Grids */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    /* Badges e Pílulas */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 10.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .badge-blue { background: #dbeafe; color: #1e40af; }
+    .badge-red { background: #fee2e2; color: #991b1b; }
+    .badge-green { background: #d1fae5; color: #065f46; }
+    .badge-amber { background: #fef3c7; color: #92400e; }
+    .badge-gray { background: #f1f5f9; color: #475569; }
+
+    /* Tabelas */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11.5px;
+      margin: 8px 0;
+    }
+
+    th {
+      background: #f8fafc;
+      color: #475569;
+      font-weight: 700;
+      text-align: left;
+      padding: 9px 12px;
+      border-bottom: 2px solid #e2e8f0;
+      text-transform: uppercase;
+      font-size: 10px;
+      letter-spacing: 0.5px;
+    }
+
+    td {
+      padding: 9px 12px;
+      border-bottom: 1px solid #f1f5f9;
+      color: #1e293b;
+      vertical-align: middle;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* Ícones e Balões */
+    .icon-box {
+      width: 34px;
+      height: 34px;
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .icon-blue { background: #eff6ff; color: #2563eb; }
+    .icon-red { background: #fef2f2; color: #dc2626; }
+    .icon-emerald { background: #ecfdf5; color: #059669; }
+    .icon-amber { background: #fffbeb; color: #d97706; }
+    .icon-purple { background: #faf5ff; color: #9333ea; }
+
+    /* ============================================================ */
+    /* PÁGINA 1 — CAPA EXECUTIVA */
+    /* ============================================================ */
+    .cover-page {
+      background: linear-gradient(145deg, #090d16 0%, #0f172a 60%, #1e293b 100%);
+      color: #ffffff;
+      padding: 30mm 26mm 24mm 26mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .cover-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .cover-logo-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 16px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      backdrop-filter: blur(10px);
+    }
+
+    .cover-logo-icon {
+      width: 26px;
+      height: 26px;
+      background: #3b82f6;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 15px;
+      color: #ffffff;
+    }
+
+    .cover-logo-text {
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+      color: #ffffff;
+    }
+
+    .cover-status {
+      font-size: 11px;
+      font-weight: 600;
+      color: #93c5fd;
+      background: rgba(59, 130, 246, 0.15);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      padding: 5px 12px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .cover-content {
+      margin-top: auto;
+      margin-bottom: auto;
+      padding: 20px 0;
+    }
+
+    .cover-tagline {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #60a5fa;
+      margin-bottom: 12px;
+    }
+
+    .cover-title {
+      font-size: 38px;
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -1.2px;
+      color: #ffffff;
+      margin: 0 0 16px 0;
+    }
+
+    .cover-title span {
+      background: linear-gradient(90deg, #60a5fa, #38bdf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .cover-description {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #cbd5e1;
+      max-width: 95%;
+      margin: 0 0 32px 0;
+    }
+
+    .cover-pillars {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 10px;
+    }
+
+    .pillar-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 14px 16px;
+    }
+
+    .pillar-number {
+      font-size: 18px;
+      font-weight: 800;
+      color: #38bdf8;
+      margin-bottom: 4px;
+    }
+
+    .pillar-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 2px;
+    }
+
+    .pillar-desc {
+      font-size: 10.5px;
+      color: #94a3b8;
+      line-height: 1.4;
+    }
+
+    .cover-footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      padding-top: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+      color: #94a3b8;
+    }
+
+    .cover-footer strong {
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================ -->
+  <!-- PÁGINA 1: CAPA EXECUTIVA -->
+  <!-- ============================================================ -->
+  <div class="page cover-page">
+    <div class="cover-top">
+      <div class="cover-logo-badge">
+        <div class="cover-logo-icon">F</div>
+        <span class="cover-logo-text">Folga Manager</span>
+      </div>
+      <div class="cover-status">Proposta Executiva • 2026</div>
+    </div>
+
+    <div class="cover-content">
+      <div class="cover-tagline">Modernização & Blindagem Jurídica</div>
+      <h1 class="cover-title">
+        Gestão Inteligente de <span>Folgas e Escalas</span> com Risco Zero na CLT
+      </h1>
+      <p class="cover-description">
+        Como substituir planilhas manuais e bilhetes soltos por uma plataforma moderna, descentralizada por setores, que protege a empresa de multas trabalhistas, reduz o retrabalho dos gestores e garante total transparência operacional.
+      </p>
+
+      <div class="cover-pillars">
+        <div class="pillar-card">
+          <div class="pillar-number">01</div>
+          <div class="pillar-title">Blindagem Trabalhista</div>
+          <div class="pillar-desc">Alertas automáticos antes de atingir o limite legal de 6 dias consecutivos sem DSR.</div>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-number">02</div>
+          <div class="pillar-title">Controle por Setor</div>
+          <div class="pillar-desc">Cada líder gerencia exclusivamente sua equipe (Cozinha, Salão, Bar, Caixa).</div>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-number">03</div>
+          <div class="pillar-title">Economia & ROI</div>
+          <div class="pillar-desc">Economia de 20+ horas/mês dos gestores e prevenção de passivos trabalhistas graves.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cover-footer">
+      <div>Preparado para: <strong>Diretoria & Gestão Geral</strong></div>
+      <div>Projeto: <strong>Folga Manager v1.0 (Testado e Pronto para Uso)</strong></div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- PÁGINA 2: O CENÁRIO ATUAL & OS RISCOS DA OPERAÇÃO -->
+  <!-- ============================================================ -->
+  <div class="page">
+    <div>
+      <div class="page-header">
+        <div class="brand">
+          <div class="brand-icon">F</div>
+          <span>Folga Manager — Diagnóstico Operacional</span>
+        </div>
+        <div class="doc-tag">Página 02 / 06</div>
+      </div>
+
+      <div class="section-eyebrow">Diagnóstico do Negócio</div>
+      <h2 class="page-title">Os Riscos Invisíveis da Gestão Manual de Escalas</h2>
+      <p class="page-subtitle">
+        Em empresas de varejo, gastronomia e serviços, gerenciar escalas por planilhas ou mensagens de WhatsApp parece econômico, mas oculta armadilhas financeiras, legais e operacionais de alto impacto.
+      </p>
+
+      <div class="grid-3" style="margin-bottom: 16px;">
+        <div class="card card-red" style="margin-bottom: 0;">
+          <div class="icon-box icon-red">⚠️</div>
+          <div style="font-weight: 800; font-size: 13px; color: #991b1b; margin-bottom: 4px;">Risco Jurídico Imediato</div>
+          <div style="font-size: 11px; color: #7f1d1d; line-height: 1.5;">
+            Artigo 67 da CLT e Súmula 146 do TST: ultrapassar 6 dias sem DSR obriga o pagamento em <strong>dobro</strong> da jornada e gera autos de infração fiscal severos.
+          </div>
+        </div>
+
+        <div class="card card-amber" style="margin-bottom: 0;">
+          <div class="icon-box icon-amber">⏱️</div>
+          <div style="font-weight: 800; font-size: 13px; color: #92400e; margin-bottom: 4px;">Desperdício de Tempo</div>
+          <div style="font-size: 11px; color: #78350f; line-height: 1.5;">
+            Gestores gastam de <strong>4 a 6 horas por semana</strong> preenchendo planilhas, corrigindo trocas e atendendo reclamações individuais de folgas.
+          </div>
+        </div>
+
+        <div class="card card-highlight" style="margin-bottom: 0;">
+          <div class="icon-box icon-blue">👥</div>
+          <div style="font-weight: 800; font-size: 13px; color: #1e3a8a; margin-bottom: 4px;">Desfalques em Horários de Pico</div>
+          <div style="font-size: 11px; color: #334155; line-height: 1.5;">
+            Sem visão integrada, dois funcionários-chave do mesmo turno folgam juntos por engano, gerando lentidão no atendimento e perda de clientes.
+          </div>
+        </div>
+      </div>
+
+      <div class="card card-highlight" style="margin-bottom: 14px;">
+        <div style="font-weight: 800; font-size: 13px; color: #0f172a; margin-bottom: 8px;">
+          📊 Comparativo: Como o Negócio Opera Hoje vs. Com o Folga Manager
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 25%;">Cenário</th>
+              <th style="width: 37%;">Processo Tradicional (Planilha / Papel)</th>
+              <th style="width: 38%;">Com Folga Manager (Automatizado)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Prevenção de Multas CLT</strong></td>
+              <td>Depende da memória ou contagem manual do gestor; fácil errar.</td>
+              <td><span class="badge badge-green">Automático</span> O sistema avisa em vermelho antes do 7º dia.</td>
+            </tr>
+            <tr>
+              <td><strong>Visão da Diretoria</strong></td>
+              <td>Inexistente em tempo real; só descobre erros no fim do mês.</td>
+              <td><span class="badge badge-blue">Tempo Real</span> Painel geral consolidado com todos os setores.</td>
+            </tr>
+            <tr>
+              <td><strong>Autonomia dos Líderes</strong></td>
+              <td>Líder da cozinha não sabe da escala do salão; desencontro total.</td>
+              <td><span class="badge badge-blue">Escopo Seguro</span> Cada gestor cuida do seu setor sem conflitos.</td>
+            </tr>
+            <tr>
+              <td><strong>Envio para Contabilidade</strong></td>
+              <td>Dias digitando anotações manuais para fechar a folha.</td>
+              <td><span class="badge badge-green">1 Clique</span> Exportação limpa em CSV/Excel formatada.</td>
+            </tr>
+            <tr>
+              <td><strong>Auditoria de Mudanças</strong></td>
+              <td>Ninguém sabe quem autorizou trocas; atritos internos.</td>
+              <td><span class="badge badge-gray">Rastreável</span> Trilha completa com data, horário e responsável.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card card-blue" style="margin-bottom: 0;">
+        <div style="display: flex; gap: 12px; align-items: center;">
+          <div style="font-size: 26px;">💡</div>
+          <div style="font-size: 11.5px; color: #1e3a8a; line-height: 1.5;">
+            <strong>O Ponto Chave para a Diretoria:</strong> Uma única reclamação trabalhista ou fiscalização com infração de DSR custa entre <strong>R$ 3.000 e R$ 15.000</strong> entre custas, multas e honorários. O Folga Manager anula essa vulnerabilidade desde o primeiro dia de uso.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <div>Folga Manager — Proposta Executiva</div>
+      <div>Confidencial e de Uso Interno</div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- PÁGINA 3: A SOLUÇÃO FOLGA MANAGER -->
+  <!-- ============================================================ -->
+  <div class="page">
+    <div>
+      <div class="page-header">
+        <div class="brand">
+          <div class="brand-icon">F</div>
+          <span>Folga Manager — Solução & Funcionalidades</span>
+        </div>
+        <div class="doc-tag">Página 03 / 06</div>
+      </div>
+
+      <div class="section-eyebrow">A Ferramenta</div>
+      <h2 class="page-title">Uma Plataforma Sob Medida para a Realidade da Empresa</h2>
+      <p class="page-subtitle">
+        Projetado com interface limpa e rápida inspirada no design macOS, o sistema elimina complexidades desnecessárias e entrega exatamente o que a liderança precisa.
+      </p>
+
+      <div class="grid-2" style="margin-bottom: 14px;">
+        <div class="card">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+            <div class="icon-box icon-red" style="margin: 0;">🎯</div>
+            <div>
+              <div style="font-weight: 800; font-size: 13px; color: #0f172a;">Card de Atenção Prioritária</div>
+              <div style="font-size: 10.5px; color: #64748b;">Destaque imediato ao abrir o sistema</div>
+            </div>
+          </div>
+          <div style="font-size: 11px; color: #334155; line-height: 1.5;">
+            Ao acessar o sistema, o gestor não perde tempo procurando planilhas: o card principal mostra exatamente quais funcionários estão sem folga agendada para a semana corrente, indicando o setor e a urgência da ação.
+          </div>
+        </div>
+
+        <div class="card">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+            <div class="icon-box icon-blue" style="margin: 0;">📅</div>
+            <div>
+              <div style="font-weight: 800; font-size: 13px; color: #0f172a;">Escala & Calendário Dinâmico</div>
+              <div style="font-size: 10.5px; color: #64748b;">Visualizações por Mês, Semana e Dia</div>
+            </div>
+          </div>
+          <div style="font-size: 11px; color: #334155; line-height: 1.5;">
+            Grade visual completa que distingue <strong>DSR Semanal</strong>, <strong>Férias</strong> e <strong>Compensações</strong> por cores. Permite marcar folgas em segundos com apenas um clique na data desejada.
+          </div>
+        </div>
+
+        <div class="card">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+            <div class="icon-box icon-emerald" style="margin: 0;">⚡</div>
+            <div>
+              <div style="font-weight: 800; font-size: 13px; color: #0f172a;">Assistente de Resolução em Lote</div>
+              <div style="font-size: 10.5px; color: #64748b;">Planejamento semanal em 3 minutos</div>
+            </div>
+          </div>
+          <div style="font-size: 11px; color: #334155; line-height: 1.5;">
+            Ferramenta exclusiva que lista todos os colaboradores com folga pendente e permite atribuir os dias de descanso de toda a equipe de uma só vez, com validação inteligente contra choques de escala.
+          </div>
+        </div>
+
+        <div class="card">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+            <div class="icon-box icon-purple" style="margin: 0;">📁</div>
+            <div>
+              <div style="font-weight: 800; font-size: 13px; color: #0f172a;">Exportação Direta para Excel / CSV</div>
+              <div style="font-size: 10.5px; color: #64748b;">Pronto para folha de pagamento e DP</div>
+            </div>
+          </div>
+          <div style="font-size: 11px; color: #334155; line-height: 1.5;">
+            Gera relatórios padronizados com codificação UTF-8 compatível com o Microsoft Excel do Brasil, contendo ID, colaborador, CPF, setor, data, tipo e justificativa para envio imediato ao RH/Contabilidade.
+          </div>
+        </div>
+      </div>
+
+      <div class="card card-emerald">
+        <div style="font-weight: 800; font-size: 13px; color: #065f46; margin-bottom: 8px;">
+          🛡️ Alerta Preventivo CLT Integrado às Regras de Negócio
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; font-size: 11.5px; color: #047857; line-height: 1.5;">
+          <div>
+            • <strong>Contagem Ativa de Dias:</strong> O sistema monitora a última folga de cada funcionário e dispara alertas aos 6 dias trabalhados.<br>
+            • <strong>Parâmetro Configurável:</strong> O limite de alerta pode ser customizado pela diretoria (ex: 5 ou 6 dias).
+          </div>
+          <div>
+            • <strong>Validação de CPF Real:</strong> Cadastro protegido contra dados inconsistentes e duplicidade de colaboradores.<br>
+            • <strong>Histórico Vitalício:</strong> Escalas e turnos passados permanecem arquivados com segurança para fins de fiscalização.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <div>Folga Manager — Proposta Executiva</div>
+      <div>Confidencial e de Uso Interno</div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- PÁGINA 4: MULTI-GESTOR, SEGURANÇA E AUDITORIA -->
+  <!-- ============================================================ -->
+  <div class="page">
+    <div>
+      <div class="page-header">
+        <div class="brand">
+          <div class="brand-icon">F</div>
+          <span>Folga Manager — Controle de Acesso & Governança</span>
+        </div>
+        <div class="doc-tag">Página 04 / 06</div>
+      </div>
+
+      <div class="section-eyebrow">Arquitetura de Controle</div>
+      <h2 class="page-title">Controle Descentralizado por Setor com Governança Central</h2>
+      <p class="page-subtitle">
+        A empresa opera com múltiplos departamentos e lideranças. O Folga Manager adota uma regra clara: <strong>o perfil define o que pode fazer, e o setor define sobre quem pode fazer</strong>.
+      </p>
+
+      <div class="card card-highlight" style="margin-bottom: 14px;">
+        <div style="font-weight: 800; font-size: 13px; color: #0f172a; margin-bottom: 8px;">
+          🔐 Perfis de Acesso e Responsabilidades Operacionais
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 20%;">Perfil</th>
+              <th style="width: 25%;">Escopo de Acesso</th>
+              <th style="width: 55%;">Permissões no Sistema</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="badge badge-blue">ADMIN</span></td>
+              <td><strong>Acesso Global</strong><br>(Toda a empresa)</td>
+              <td>Visão panorâmica de todos os setores, gestão de usuários, criação de novos departamentos, auditoria completa e parametrização.</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-amber">MANAGER</span></td>
+              <td><strong>Setores Autorizados</strong><br>(Ex: Cozinha e Bar)</td>
+              <td>Visualiza, agenda folgas e gerencia escalas <strong>exclusivamente</strong> da sua equipe. Bloqueado de alterar ou espiar funcionários de outros setores.</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-gray">VIEWER</span></td>
+              <td><strong>Somente Leitura</strong><br>(Ex: Recepção/Fiscal)</td>
+              <td>Acompanha o calendário de escalas sem autorização para editar, garantindo que ninguém altere escalas sem autorização prévia.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="grid-2" style="margin-bottom: 14px;">
+        <div class="card">
+          <div style="font-weight: 800; font-size: 12.5px; color: #0f172a; margin-bottom: 6px;">
+            🔒 Isolamento Real no Backend
+          </div>
+          <div style="font-size: 11px; color: #475569; line-height: 1.5;">
+            A segurança não é apenas visual: mesmo que um gestor tente acessar um funcionário de outro setor digitando o endereço na barra do navegador, o servidor bloqueia a tentativa com <strong>403 Forbidden</strong>.
+          </div>
+        </div>
+
+        <div class="card">
+          <div style="font-weight: 800; font-size: 12.5px; color: #0f172a; margin-bottom: 6px;">
+            🛡️ Preservação Histórica (Zero Exclusão)
+          </div>
+          <div style="font-size: 11px; color: #475569; line-height: 1.5;">
+            Setores e colaboradores com histórico nunca são deletados fisicamente do banco de dados. Eles recebem desativação lógica, mantendo o histórico de escalas e folgas protegido para sempre.
+          </div>
+        </div>
+      </div>
+
+      <div class="card card-blue" style="margin-bottom: 0;">
+        <div style="font-weight: 800; font-size: 13px; color: #1e3a8a; margin-bottom: 6px;">
+          📋 Trilha de Auditoria Completa: Fim do "Quem mexeu na escala?"
+        </div>
+        <div style="font-size: 11px; color: #1e40af; line-height: 1.5;">
+          Toda e qualquer ação dentro do sistema fica indelevelmente gravada:
+          <div style="margin-top: 6px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+            <div>• Quem criou, alterou ou excluiu cada folga;</div>
+            <div>• Data e horário exato de cada modificação;</div>
+            <div>• Justificativa registrada pelo gestor responsável;</div>
+            <div>• Setor afetado e dados do colaborador.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <div>Folga Manager — Proposta Executiva</div>
+      <div>Confidencial e de Uso Interno</div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- PÁGINA 5: RETORNO SOBRE O INVESTIMENTO (ROI) -->
+  <!-- ============================================================ -->
+  <div class="page">
+    <div>
+      <div class="page-header">
+        <div class="brand">
+          <div class="brand-icon">F</div>
+          <span>Folga Manager — Retorno sobre o Investimento</span>
+        </div>
+        <div class="doc-tag">Página 05 / 06</div>
+      </div>
+
+      <div class="section-eyebrow">Impacto Financeiro</div>
+      <h2 class="page-title">Por Que Este Projeto é Altamente Vantajoso para a Empresa</h2>
+      <p class="page-subtitle">
+        A implementação do Folga Manager não representa apenas organização operacional; trata-se de um investimento com retorno financeiro direto e mensurável.
+      </p>
+
+      <div class="grid-3" style="margin-bottom: 16px;">
+        <div class="card card-emerald" style="margin-bottom: 0; text-align: center; padding: 18px 14px;">
+          <div style="font-size: 10px; font-weight: 700; color: #065f46; text-transform: uppercase;">Economia em Passivos</div>
+          <div style="font-size: 24px; font-weight: 800; color: #047857; margin: 6px 0;">Até R$ 25.000+</div>
+          <div style="font-size: 10.5px; color: #065f46; line-height: 1.4;">
+            Prevenção de 1 único processo de DSR pago em dobro ou multa de fiscalização do trabalho.
+          </div>
+        </div>
+
+        <div class="card card-blue" style="margin-bottom: 0; text-align: center; padding: 18px 14px;">
+          <div style="font-size: 10px; font-weight: 700; color: #1e40af; text-transform: uppercase;">Produtividade dos Líderes</div>
+          <div style="font-size: 24px; font-weight: 800; color: #2563eb; margin: 6px 0;">+20 Horas/Mês</div>
+          <div style="font-size: 10.5px; color: #1e40af; line-height: 1.4;">
+            Tempo recuperado de líderes que deixam o operacional de lado para preencher planilhas.
+          </div>
+        </div>
+
+        <div class="card card-highlight" style="margin-bottom: 0; text-align: center; padding: 18px 14px;">
+          <div style="font-size: 10px; font-weight: 700; color: #475569; text-transform: uppercase;">Custo de Aquisição</div>
+          <div style="font-size: 24px; font-weight: 800; color: #0f172a; margin: 6px 0;">R$ 0,00</div>
+          <div style="font-size: 10.5px; color: #475569; line-height: 1.4;">
+            Código proprietário já desenvolvido, sem mensalidades abusivas por funcionário.
+          </div>
+        </div>
+      </div>
+
+      <div class="card card-highlight" style="margin-bottom: 14px;">
+        <div style="font-weight: 800; font-size: 13px; color: #0f172a; margin-bottom: 8px;">
+          📈 Análise Comparativa de Custos: Folga Manager vs. Mercado
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Critério</th>
+              <th>Softwares Genéricos (Mercado)</th>
+              <th>Folga Manager (Próprio)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Custo Recorrente</strong></td>
+              <td>Cobrança por colaborador (R$ 8 a R$ 15/mês por cabeça).</td>
+              <td><span class="badge badge-green">Custo Zero</span> Servidor próprio e sem royalties.</td>
+            </tr>
+            <tr>
+              <td><strong>Adaptação à Empresa</strong></td>
+              <td>Rígidos, feitos para escritórios e difíceis de adaptar ao varejo.</td>
+              <td><span class="badge badge-blue">Sob Medida</span> Setorizado para Cozinha, Bar, Salão e Caixa.</td>
+            </tr>
+            <tr>
+              <td><strong>Privacidade dos Dados</strong></td>
+              <td>Dados sensíveis dos colaboradores em servidores de terceiros.</td>
+              <td><span class="badge badge-green">100% Interno</span> Banco de dados seguro sob controle total da empresa.</td>
+            </tr>
+            <tr>
+              <td><strong>Complexidade de Treinamento</strong></td>
+              <td>Sistemas burocráticos que a equipe resiste em adotar.</td>
+              <td><span class="badge badge-blue">Intuitivo</span> Interface amigável que qualquer líder domina em 5 minutos.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card card-emerald" style="margin-bottom: 0;">
+        <div style="font-weight: 800; font-size: 13px; color: #065f46; margin-bottom: 6px;">
+          🌟 Benefício Adicional: Satisfação e Retenção de Funcionários
+        </div>
+        <div style="font-size: 11px; color: #047857; line-height: 1.5;">
+          A maior causa de insatisfação e rotatividade no varejo e gastronomia são escalas divulgadas em cima da hora ou com sensação de favoritismo. O Folga Manager proporciona <strong>previsibilidade de vida pessoal</strong> para o colaborador, reduzindo atritos internos e aumentando a retenção de talentos da equipe.
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <div>Folga Manager — Proposta Executiva</div>
+      <div>Confidencial e de Uso Interno</div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- PÁGINA 6: PLANO DE IMPLANTAÇÃO & PRÓXIMOS PASSOS -->
+  <!-- ============================================================ -->
+  <div class="page">
+    <div>
+      <div class="page-header">
+        <div class="brand">
+          <div class="brand-icon">F</div>
+          <span>Folga Manager — Roteiro de Implantação</span>
+        </div>
+        <div class="doc-tag">Página 06 / 06</div>
+      </div>
+
+      <div class="section-eyebrow">Execução Prática</div>
+      <h2 class="page-title">Plano de Implantação Imediato e Sem Riscos</h2>
+      <p class="page-subtitle">
+        Diferente de sistemas que exigem meses de consultoria, o Folga Manager <strong>já está pronto, testado e validado tecnicamente</strong>. A implantação pode começar hoje.
+      </p>
+
+      <div class="card card-highlight" style="margin-bottom: 14px;">
+        <div style="font-weight: 800; font-size: 13px; color: #0f172a; margin-bottom: 10px;">
+          🚀 Roteiro de Adoção Sugerido (3 Semanas)
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <div style="display: flex; gap: 12px; align-items: flex-start;">
+            <div style="width: 28px; height: 28px; border-radius: 8px; background: #2563eb; color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 12px; shrink: 0;">1</div>
+            <div>
+              <div style="font-weight: 700; font-size: 12px; color: #0f172a;">Semana 1: Demonstração Prática & Piloto em 1 Setor</div>
+              <div style="font-size: 11px; color: #64748b; line-height: 1.4;">
+                Apresentação de 15 minutos do sistema funcionando com dados reais. Escolha de um setor piloto (ex: Cozinha ou Salão) para validar a rotina sem impacto no restante da operação.
+              </div>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 12px; align-items: flex-start;">
+            <div style="width: 28px; height: 28px; border-radius: 8px; background: #2563eb; color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 12px; shrink: 0;">2</div>
+            <div>
+              <div style="font-weight: 700; font-size: 12px; color: #0f172a;">Semana 2: Treinamento Rápido dos Líderes & Expansão</div>
+              <div style="font-size: 11px; color: #64748b; line-height: 1.4;">
+                Capacitação rápida dos encarregados de setor (10 minutos são suficientes). Cadastro dos demais setores e colaboradores no banco seguro.
+              </div>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 12px; align-items: flex-start;">
+            <div style="width: 28px; height: 28px; border-radius: 8px; background: #059669; color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 12px; shrink: 0;">3</div>
+            <div>
+              <div style="font-weight: 700; font-size: 12px; color: #0f172a;">Semana 3 em diante: Operação 100% Integrada & Relatórios</div>
+              <div style="font-size: 11px; color: #64748b; line-height: 1.4;">
+                Escalas geradas exclusivamente pelo sistema, envio mensal automático de relatórios CSV para a contabilidade e tranquilidade jurídica total.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card card-blue" style="margin-bottom: 14px;">
+        <div style="font-weight: 800; font-size: 13px; color: #1e3a8a; margin-bottom: 6px;">
+          💻 Status Técnico Atual do Projeto
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; font-size: 11px; color: #1e40af;">
+          <div>✅ <strong>100% Funcional</strong> no ambiente atual</div>
+          <div>✅ <strong>Bateria de Testes</strong> com 100% de aprovação</div>
+          <div>✅ <strong>Segurança de Dados</strong> com tokens criptografados</div>
+        </div>
+      </div>
+
+      <div class="card card-highlight" style="border: 2px solid #2563eb; background: #ffffff; padding: 18px; margin-bottom: 0;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <div style="font-size: 10.5px; font-weight: 700; text-transform: uppercase; color: #2563eb; letter-spacing: 0.5px;">Próximo Passo Recomendado</div>
+            <div style="font-size: 15px; font-weight: 800; color: #0f172a; margin-top: 2px;">
+              Agendar 15 minutos para demonstração ao vivo do sistema
+            </div>
+            <div style="font-size: 11px; color: #64748b; margin-top: 4px;">
+              O sistema já está em execução local na rede da empresa e pronto para demonstração imediata.
+            </div>
+          </div>
+          <div style="text-align: right; shrink: 0;">
+            <div style="display: inline-block; padding: 8px 16px; background: #2563eb; color: white; border-radius: 8px; font-weight: 700; font-size: 11.5px;">
+              Demonstração Pronta
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <div>Folga Manager — Proposta Executiva</div>
+      <div>Elaborado com excelência para a tomada de decisão</div>
+    </div>
+  </div>
+
+</body>
+</html>
